@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.veka.mapper.UserInfoMapper">
+    <!-- com.veka.mapper.UserInfoMapper -->
+    <resultMap id="userInfoResult" type="com.veka.po.UserInfo">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <!-- 把查询的数据封装成po对应的对象 -->
+    <select id="selectUserById" resultType="userInfo">
+        select * from user_info where user_id = #{id}
+    </select>
+    <select id="selectAllUsers" resultType="userInfo">
+        select * from user_info
+    </select>
+    <insert id="insertUserInfo" parameterType="UserInfo" >
+        insert into user_info(username,user_password,create_time)
+        values (#{username},#{userPassword},#{createTime})
+    </insert>
+    <update id="updateUsernameById">
+        update user_info set username = #{name} where user_id = #{id}
+    </update>
+    <delete id="deleteUserById">
+        delete from user_info where user_id = #{id}
+    </delete>
+
+    <select id="queryUserInfoByUsernameAndPwd" resultType="UserInfo">
+        select * from user_info where username = #{name} and user_password = #{password}
+    </select>
+
+    <select id="queryUserInfoByUsernameOrPwd" resultType="UserInfo" parameterType="UserInfo">
+        select * from user_info where username = #{username}
+        <if test="userPassword != null and userPassword != ''">
+            AND user_password = #{userPassword}
+        </if>
+    </select>
+
+    <select id="queryUserInfoByParam" resultType="UserInfo" parameterType="UserInfo">
+        select * from user_info
+        <where>
+            <if test="username != null and username != ''">
+                 And username = #{username}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                AND user_password = #{userPassword}
+            </if>
+        </where>
+    </select>
+
+    <update id="UpdateUserInfoByParam" parameterType="UserInfo">
+        update user_info
+        <set>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="userPassword != null and userPassword != ''">user_password = #{userPassword}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--item：集合中元素迭代时的别名
+    index：集合中元素迭代时的索引
+    open：常用语where语句中，表示以什么开始，比如以'('开始separator：表示在每次进行迭代时的分隔符，
+    close 常用语where语句中，表示以什么结束，
+    -->
+    <select id="selectUserInfoByIds" resultType="UserInfo">
+        SELECT * FROM user_info
+        WHERE user_id in
+        <foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
+</mapper>

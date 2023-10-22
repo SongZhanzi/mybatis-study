@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>   <!-- 配置文件 -->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 使用驼峰命名法 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 日志输出，可以打印sql-->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+
+    </settings>
+    <typeAliases>
+        <!-- 配置别名 -->
+        <typeAlias type="com.veka.po.UserInfo" alias="UserInfo"/>
+        <!-- 因为没有使用resultMap进行一一映射，所以名称必须对应，为驼峰式 -->
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- 告诉他sql文的位置在哪 -->
+        <mapper resource="UserInfoMapper.xml"/>
+    </mappers>
+</configuration>
