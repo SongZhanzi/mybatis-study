@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="EasyCodeTableSetting">
+    <option name="tableInfoMap">
+      <map>
+        <entry key="mybatis.blog" value="eyJuYW1lIjoiQmxvZyIsInByZU5hbWUiOiIiLCJ0ZW1wbGF0ZUdyb3VwTmFtZSI6IkRlZmF1bHQiLCJmdWxsQ29sdW1uIjpbeyJuYW1lIjoiYmxvZ0lkIiwiY29tbWVudCI6IpSOi3FJRCIsInR5cGUiOiJqYXZhLmxhbmcuTG9uZyIsImN1c3RvbSI6ZmFsc2UsImV4dCI6Int9In0seyJuYW1lIjoidXNlcklkIiwiY29tbWVudCI6Ij+VXJdwP0lEIiwidHlwZSI6ImphdmEubGFuZy5Mb25nIiwiY3VzdG9tIjpmYWxzZSwiZXh0Ijoie30ifSx7Im5hbWUiOiJibG9nVGl0bGUiLCJjb21tZW50IjoilI6LcT8/IiwidHlwZSI6ImphdmEubGFuZy5TdHJpbmciLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9LHsibmFtZSI6ImJsb2dDb250ZW50IiwiY29tbWVudCI6IpSOi3GT4JdlIiwidHlwZSI6ImphdmEubGFuZy5TdHJpbmciLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9LHsibmFtZSI6ImNyZWF0ZVRpbWUiLCJjb21tZW50IjoiP4yaPz8iLCJ0eXBlIjoiamF2YS51dGlsLkRhdGUiLCJjdXN0b20iOmZhbHNlLCJleHQiOiJ7fSJ9LHsibmFtZSI6InVwZGF0ZVRpbWUiLCJjb21tZW50IjoijViQVj8/IiwidHlwZSI6ImphdmEudXRpbC5EYXRlIiwiY3VzdG9tIjpmYWxzZSwiZXh0Ijoie30ifV0sInNhdmVQYWNrYWdlTmFtZSI6ImNvbS52ZWthIiwic2F2ZVBhdGgiOiIuL3NyYy9tYWluL2phdmEvY29tL3Zla2EiLCJzYXZlTW9kZWxOYW1lIjoibXliYXRpcy1zdHVkeSJ9" />
+      </map>
+    </option>
+  </component>
+</project>

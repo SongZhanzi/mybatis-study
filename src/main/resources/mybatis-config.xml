@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
     <settings>
         <!-- 使用驼峰命名法 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
@@ -15,6 +16,11 @@
         <typeAlias type="com.veka.po.UserInfo" alias="UserInfo"/>
         <!-- 因为没有使用resultMap进行一一映射，所以名称必须对应，为驼峰式 -->
     </typeAliases>
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -29,5 +35,6 @@
     <mappers>
         <!-- 告诉他sql文的位置在哪 -->
         <mapper resource="UserInfoMapper.xml"/>
+        <mapper resource="BlogDao.xml"/>
     </mappers>
 </configuration>

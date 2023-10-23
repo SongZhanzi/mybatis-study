@@ -59,6 +59,10 @@ public interface UserInfoMapper {
 
     List<UserInfo> selectUserInfoByIds(@Param("ids") List<Long> ids);
 
+    List<UserInfo> selectUserInfoByPages(@Param("pageIndex") Integer pageIndex, @Param("pageSize") Integer pageSize);
+
+    Integer userInfoCounts();
+
 
 
 }

@@ -75,5 +75,13 @@
         </foreach>
     </select>
 
+    <select id="selectUserInfoByPages" resultType="UserInfo">
+        SELECT * FROM user_info limit #{pageIndex}, #{pageSize}
+    </select>
+
+    <select id="userInfoCounts" resultType="Integer">
+        SELECT count(1) FROM user_info;
+    </select>
+
 
 </mapper>

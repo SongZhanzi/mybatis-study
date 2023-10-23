@@ -5,7 +5,11 @@ package com.veka;
  *@Date：2023/10/22  10:58
  */
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.veka.mapper.BlogDao;
 import com.veka.mapper.UserInfoMapper;
+import com.veka.po.Blog;
 import com.veka.po.UserInfo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,16 +18,47 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) throws IOException {
         SqlSession sqlSession = getSqlSession();
+        BlogDao mapper = sqlSession.getMapper(BlogDao.class);
+        System.out.println(mapper.queryById(1l));
+
+    }
+
+    private static void queryUserInfoByParam2() throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("Tony");
+        PageHelper.startPage(1, 1);
+
+        List<UserInfo> userInfos = mapper.queryUserInfoByParam(userInfo);
+        PageInfo<UserInfo> UserInfoPageInfo = new PageInfo<>(userInfos);
+        long total = UserInfoPageInfo.getTotal();
+
+        List<UserInfo> list = UserInfoPageInfo.getList();
+        System.out.println("总页数：" + total);
+        list.forEach(e -> System.out.println("userInfo:" + e));
+        sqlSession.close();
+    }
+
+    private static void selectUserInfoByPages(Integer pageIndex, Integer pageSize) throws IOException {
+        SqlSession sqlSession = getSqlSession();
+        UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+        List<UserInfo> userInfos = mapper.selectUserInfoByPages((pageIndex-1)*pageSize, pageSize);
+        userInfos.forEach(e -> System.out.println("userInfo:" + e));
+        System.out.println("总页数:"+mapper.userInfoCounts());
+        sqlSession.close();
+    }
+
+    private static void selectUserInfoByIds() throws IOException {
+        SqlSession sqlSession = getSqlSession();
         UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
         mapper.selectUserInfoByIds(Arrays.asList(1l,2l,1l,3l));
-
     }
 
     private static void UpdateUserInfoByParam() throws IOException {
@@ -44,8 +79,12 @@ public class Application {
         UserInfo userInfo = new UserInfo();
         userInfo.setUsername("Tony");
         userInfo.setUserPassword("");
-        List<UserInfo> userInfos = mapper.queryUserInfoByParam(userInfo);
+        List<UserInfo> userInfos = mapper.queryUserInfoByParam(userInfo).stream()
+                .filter(e-> Objects.equals(e.getUserPassword(),"112"))
+                .sorted(Comparator.comparing(UserInfo::getUpdateTime))
+                .collect(Collectors.toList());
         userInfos.forEach(e -> System.out.println("userInfo:" + e));
+
         sqlSession.close();
     }
 
